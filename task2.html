@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      .item-list {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- - Вы разрабатываете систему отзывов для вашего веб-сайта.
+    Пользователи могут оставлять отзывы, но чтобы исключить слишком
+    короткие или слишком длинные сообщения, вы решаете установить
+    некоторые ограничения. 
+    - Создайте HTML-структуру с текстовым полем для ввода отзыва, 
+    кнопкой для отправки и контейнером, где будут отображаться отзывы. 
+    - Напишите функцию, которая будет добавлять отзыв в контейнер с 
+    отзывами. Однако если длина введенного отзыва менее 50 или более 
+    500 символов, функция должна генерировать исключение. 
+    - При добавлении отзыва, он должен отображаться на
+    странице под предыдущими отзывами, а не заменять их. -->
+    <h2>Ваши отзывы</h2>
+    Продукт: <input class="product-name" type="text" /> <br /><br />
+    <textarea
+      class="user-comment"
+      rows="4"
+      cols="50"
+      placeholder="Оствьте комментарий здесь"
+    ></textarea>
+    <br /><br />
+    <button class="button-comment">Оставить комментарий</button>
+    <h3>Комментарии</h3>
+    <div class="error-message"></div>
+    <div class="item-list"></div>
+    <script>
+      const inputName = document.querySelector('.product-name');
+      const inputComm = document.querySelector('.user-comment');
+      const buttonComm = document.querySelector('.button-comment');
+      const listComm = document.querySelector('.item-list');
+      const messageError = document.querySelector('.error-message');
+
+      buttonComm.addEventListener('click', () => {
+        const product = inputName.value;
+        const comment = inputComm.value;
+        try {
+          if (
+            comment.length < 50 ||
+            comment.length > 500 ||
+            product.length < 5
+          ) {
+            throw new Error('Некорректная длина текста');
+          }
+          const productName = document.createElement('h4');
+          productName.textContent = `product: ${product}`;
+          listComm.appendChild(productName);
+          const commentText = document.createElement('p');
+          commentText.textContent = `text: ${comment}`;
+          listComm.appendChild(commentText);
+          messageError.textContent = '';
+        } catch (error) {
+          messageError.textContent = error.message;
+          messageError.style.color = 'red';
+        } finally {
+          console.log('Попытка');
+        }
+      });
+
+      const initialData = [
+        {
+          product: 'Apple iPhone 13',
+          reviews: [
+            {
+              id: '1',
+              text: 'Отличный телефон! Батарея держится долго.',
+            },
+            {
+              id: '2',
+              text: 'Камера супер, фото выглядят просто потрясающе.',
+            },
+          ],
+        },
+        {
+          product: 'Samsung Galaxy Z Fold 3',
+          reviews: [
+            {
+              id: '3',
+              text: 'Интересный дизайн, но дорогой.',
+            },
+          ],
+        },
+        {
+          product: 'Sony PlayStation 5',
+          reviews: [
+            {
+              id: '4',
+              text: 'Люблю играть на PS5, графика на высоте.',
+            },
+          ],
+        },
+      ];
+
+      asd = (arr) => {
+        const product = inputName.value;
+        const comment = inputComm.value;
+        for (const iterator1 of arr) {
+          for (const iterator2 of iterator1.reviews) {
+            const productName = document.createElement('h4');
+            productName.textContent = `product: ${iterator1.product}`;
+            listComm.appendChild(productName);
+            const commentText = document.createElement('p');
+            commentText.textContent = `text: ${iterator2.text}`;
+            listComm.appendChild(commentText);
+          }
+        }
+      };
+      asd(initialData);
+    </script>
+  </body>
+</html>
