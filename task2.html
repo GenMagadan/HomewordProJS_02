@@ -34,7 +34,7 @@
       class="user-comment"
       rows="4"
       cols="50"
-      placeholder="Оствьте комментарий здесь"
+      placeholder="Оставьте комментарий здесь"
     ></textarea>
     <br /><br />
     <button class="button-comment">Оставить комментарий</button>
@@ -108,9 +108,7 @@
         },
       ];
 
-      asd = (arr) => {
-        const product = inputName.value;
-        const comment = inputComm.value;
+      startPage = (arr) => {
         for (const iterator1 of arr) {
           for (const iterator2 of iterator1.reviews) {
             const productName = document.createElement('h4');
@@ -122,7 +120,7 @@
           }
         }
       };
-      asd(initialData);
+      startPage(initialData);
     </script>
   </body>
 </html>
