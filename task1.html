@@ -41,8 +41,13 @@
           },
         ];
 
-        constructor([]) {
-          this.#books = [];
+        constructor(initialBooks) {
+          if (new Set(initialBooks).size !== initialBooks.length) {
+            throw new Error(
+              'Исходный список книг содержит дубликаты.'
+            );
+          }
+          this.#books = initialBooks;
         }
 
         get contentLibrary() {
@@ -86,7 +91,6 @@
 
       let newLibrary = new Library([]);
       console.log(newLibrary.contentLibrary);
-
       newLibrary.addBook('Base', 'Azimov');
       // newLibrary.addBook('Base', 'Azimov'); // Error
       newLibrary.addBook('Starship Troopers', 'Heinlein');
