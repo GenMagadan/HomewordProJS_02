@@ -34,15 +34,13 @@
     противном случае выбрасывайте ошибку. -->
     <script>
       class Library {
-        #books = [
-          {
-            author_book: 'Author1',
-            book_title: 'Title1',
-          },
-        ];
+        #books = [];
 
         constructor(initialBooks) {
-          if (new Set(initialBooks).size !== initialBooks.length) {
+          const uniqueTitle = [
+            ...new Set(initialBooks.map((obj) => obj.book_title)),
+          ];
+          if (uniqueTitle.size !== initialBooks.length) {
             throw new Error(
               'Исходный список книг содержит дубликаты.'
             );
@@ -89,6 +87,18 @@
         }
       }
 
+      const libraryTest = [
+        {
+          author_book: 'Author1',
+          book_title: 'Title1',
+        },
+        {
+          author_book: 'Author1',
+          book_title: 'Title1',
+        },
+      ];
+
+      // let newLibraryTest = new Library(libraryTest); // Error: Исходный список книг содержит дубликаты
       let newLibrary = new Library([]);
       console.log(newLibrary.contentLibrary);
       newLibrary.addBook('Base', 'Azimov');
